@@ -25,6 +25,7 @@ import com.team2.studentfitness.ui.navigation.AppRoutes
 import com.team2.studentfitness.ui.screens.DeveloperMenuScreen
 import com.team2.studentfitness.ui.screens.DetailScreen
 import com.team2.studentfitness.ui.screens.Dashboard
+import com.team2.studentfitness.ui.screens.DashboardMentalHealth
 import com.team2.studentfitness.ui.screens.LoginScreen
 import com.team2.studentfitness.ui.screens.SettingsScreen
 import com.team2.studentfitness.ui.theme.StudentFitnessTheme
@@ -80,6 +81,10 @@ class MainActivity : ComponentActivity() {
                                 onOpenDevMenu = { navController.navigate(AppRoutes.DeveloperMenu) }
                             )
                         }
+                        composable(AppRoutes.DashboardTest) {
+                            DashboardMentalHealth(navController = navController)
+                        }
+                        
                         composable(AppRoutes.DeveloperMenu) {
                             DeveloperMenuScreen(navController = navController)
                         }

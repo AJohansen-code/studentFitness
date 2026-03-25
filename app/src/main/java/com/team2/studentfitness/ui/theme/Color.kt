@@ -27,3 +27,7 @@ val TextDim = Color(0xFFB0BEC5)
 val LoginBackground = Color(0xFF0D8D84)
 val LoginOrange = Color(0xFFF7A643)
 val LoginInputBg = Color(0xFFF2E7E7)
+
+// Mental Health
+val MentalAccent = Color(0xFFA78BFA) // Purple from your Dashboard Style.css
+val MentalCardBg = Color(0xFFF7EEEE)     // Light lavender for the background

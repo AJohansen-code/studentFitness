@@ -8,6 +8,8 @@ data class ScreenMenuItem(
 object AppRoutes {
     const val Login = "login"
     const val Dashboard = "dashboard"
+
+    const val DashboardTest = "dashboard-test" // Your new version
     const val Settings = "settings"
     const val DeveloperMenu = "dev-menu"
     const val DetailTemplate = "detail/{feature}"
@@ -18,7 +20,8 @@ object AppRoutes {
 // Source of truth for the developer screen picker.
 val ScreenMenu = listOf(
     ScreenMenuItem(title = "Login", route = AppRoutes.Login),
-    ScreenMenuItem(title = "Dashboard", route = AppRoutes.Dashboard),
+    ScreenMenuItem(title = "Original Dashboard", route = AppRoutes.Dashboard),//ScreenMenuItem(title = "Dashboard", route = AppRoutes.Dashboard),
+    ScreenMenuItem(title = "Mental Health Dashboard (Test)", route = AppRoutes.DashboardTest), // testing the updated dashboard
     ScreenMenuItem(title = "Settings", route = AppRoutes.Settings),
     ScreenMenuItem(title = "Detail: Heart Rate", route = AppRoutes.detail("Heart Rate")),
     ScreenMenuItem(title = "Detail: Calories", route = AppRoutes.detail("Calories")),
@@ -27,5 +30,8 @@ val ScreenMenu = listOf(
     ScreenMenuItem(title = "Detail: Protein Intake", route = AppRoutes.detail("Protein Intake")),
     ScreenMenuItem(title = "Detail: Workout Tutorials", route = AppRoutes.detail("Workout Tutorials")),
     ScreenMenuItem(title = "Detail: Mental Health", route = AppRoutes.detail("Mental Health"))
+            ,
+
+
 )
 

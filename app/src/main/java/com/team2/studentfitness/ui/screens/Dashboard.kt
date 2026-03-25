@@ -37,8 +37,10 @@ import com.team2.studentfitness.ui.theme.StudentFitnessTheme
 fun Dashboard(navController: NavController) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-    val database = (context.applicationContext as DatabaseCreation).database
-    val settingsDao = database.settingsDao()
+    // Use safe cast for applicationContext to avoid ClassCastException in Compose Previews.
+    // In Preview mode, applicationContext is a bridge-specific context, not the app's DatabaseCreation class.
+    val database = (context.applicationContext as? DatabaseCreation)?.database
+    val settingsDao = database?.settingsDao()
 
     var userName by remember { mutableStateOf("User") }
 
@@ -46,7 +48,9 @@ fun Dashboard(navController: NavController) {
         // Using uid 1000 from the pre-populated dummyusersettings.csv
         // For actual integration, should pull uid of currently logged-in user
         try {
-            userName = settingsDao.getName(1000)
+            settingsDao?.let {
+                userName = it.getName(1000)
+            }
         } catch (e: Exception) {
             // Fallback if not found
         }

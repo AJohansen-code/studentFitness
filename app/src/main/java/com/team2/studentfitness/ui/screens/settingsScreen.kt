@@ -3,20 +3,13 @@ package com.team2.studentfitness.ui.screens
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.team2.studentfitness.ui.theme.NeonTeal
@@ -24,6 +17,22 @@ import com.team2.studentfitness.ui.theme.NeonOrange
 import com.team2.studentfitness.ui.theme.CardBg
 import com.team2.studentfitness.ui.theme.TextDim
 
+@Composable
+fun PastEntryCard(entry: JournalEntry) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = Color.White),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Row(Modifier.height(IntrinsicSize.Min)) {
+            Box(Modifier.fillMaxHeight().width(4.dp).background(NeonOrange))
+            Column(modifier = Modifier.padding(15.dp)) {
+                Text(entry.date, fontSize = 12.sp, color = Color.Gray, fontWeight = FontWeight.Bold)
+                Text(entry.content, color = Color.Black)
+            }
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,6 +44,14 @@ fun SettingsScreen(
     // ---- UI-only state (frontend) ----
     val gyms = remember {
         listOf("UALR Fitness Center", "Planet Fitness", "LA Fitness", "Anytime Fitness", "Other")
+    }
+
+    // Past Journal entries
+    val pastEntries = remember {
+        listOf(
+            JournalEntry("Oct 24", "Focused on breathing today. felt much better after the gym."),
+            JournalEntry("Oct 22", "Tough physics exam, but the workout helped clear my head.")
+        )
     }
 
     var homeGym by remember { mutableStateOf(gyms.first()) }
@@ -74,6 +91,21 @@ fun SettingsScreen(
             )
 
             Spacer(Modifier.height(16.dp))
+
+            // Reflection History Section
+            SettingsSection(title = "Reflection History") {
+                if (pastEntries.isEmpty()) {
+                    Text("No reflections saved yet.", color = TextDim, fontSize = 13.sp)
+                } else {
+                    pastEntries.forEach { entry ->
+                        PastEntryCard(entry)
+                        Spacer(Modifier.height(8.dp))
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+
             //  Gym Settings
             SettingsSection(title = "Gym") {
                 // Home Gym Dropdown
